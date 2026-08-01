@@ -5,6 +5,9 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
+    build: {
+      sourcemap: false,
+    },
     nitro: {
       preset: "node-server",
     },
