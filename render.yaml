@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: azure-ai-suite
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node .output/server/index.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
