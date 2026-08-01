@@ -1,9 +1,4 @@
-import {
-  FOCUS_MAX,
-  FOCUS_MIN,
-  focusRingStyleOptions,
-  useFocusRing,
-} from "@/hooks/use-focus-ring";
+import { FOCUS_MAX, FOCUS_MIN, focusRingStyleOptions, useFocusRing } from "@/hooks/use-focus-ring";
 
 /**
  * Lets keyboard users pick a focus outline style and thickness so the ring stays
@@ -16,10 +11,7 @@ export function FocusRingSetting({ className = "" }: { className?: string }) {
   return (
     <section aria-labelledby="focus-ring-title" className={className}>
       <div className="flex items-center justify-between gap-3">
-        <h3
-          id="focus-ring-title"
-          className="text-sm font-medium text-card-foreground"
-        >
+        <h3 id="focus-ring-title" className="text-sm font-medium text-card-foreground">
           Focus outline
         </h3>
         <button

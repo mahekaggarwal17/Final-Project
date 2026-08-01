@@ -18,13 +18,44 @@ type Node = {
  * CivicPulse case study rather than an abstract ring.
  */
 export const heroNodes: Node[] = [
-  { id: "speech", label: "Speech", role: "Voice report in", tint: "card-skin", x: 2, y: 12, z: 110 },
+  {
+    id: "speech",
+    label: "Speech",
+    role: "Voice report in",
+    tint: "card-skin",
+    x: 2,
+    y: 12,
+    z: 110,
+  },
   { id: "vision", label: "Vision", role: "Photo triage", tint: "card-mint", x: 58, y: 4, z: 70 },
-  { id: "language", label: "Language", role: "Urgency + entities", tint: "card-lilac", x: 64, y: 50, z: 130 },
-  { id: "rag", label: "RAG Search", role: "City bylaw lookup", tint: "card-sand", x: 1, y: 56, z: 60 },
-  { id: "openai", label: "OpenAI", role: "Dispatch plan out", tint: "card-grey", x: 30, y: 76, z: 150 },
+  {
+    id: "language",
+    label: "Language",
+    role: "Urgency + entities",
+    tint: "card-lilac",
+    x: 64,
+    y: 50,
+    z: 130,
+  },
+  {
+    id: "rag",
+    label: "RAG Search",
+    role: "City bylaw lookup",
+    tint: "card-sand",
+    x: 1,
+    y: 56,
+    z: 60,
+  },
+  {
+    id: "openai",
+    label: "OpenAI",
+    role: "Dispatch plan out",
+    tint: "card-grey",
+    x: 30,
+    y: 76,
+    z: 150,
+  },
 ];
-
 
 export function HeroScene() {
   const stageRef = useRef<HTMLDivElement>(null);

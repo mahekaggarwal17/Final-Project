@@ -8,7 +8,6 @@ import { ServiceDialog } from "./ServiceDialog";
 import { ServiceFilterBar, matchesService } from "./ServiceFilterBar";
 import { useServiceWarmup } from "@/hooks/use-service-warmup";
 
-
 export type ServiceExample = {
   label: string;
   input: string;
@@ -148,8 +147,7 @@ export const services: Service[] = [
           include_citations: true,
         },
         response: {
-          answer:
-            "12 casual leaves per calendar year, with a maximum of 3 taken consecutively.",
+          answer: "12 casual leaves per calendar year, with a maximum of 3 taken consecutively.",
           citations: [
             {
               document: "employee-handbook.pdf",
@@ -174,8 +172,7 @@ export const services: Service[] = [
           min_score: 0.75,
         },
         response: {
-          answer:
-            "I could not find that in the indexed documents.",
+          answer: "I could not find that in the indexed documents.",
           citations: [],
           retrieved: 0,
           grounded: false,
@@ -206,7 +203,7 @@ export const services: Service[] = [
         label: "Speech to text",
         input: "🎙️ 6s clip: “What were last quarter's support ticket trends?”",
         output:
-          "Transcript: \"What were last quarter's support ticket trends?\"\nConfidence 0.94 · Locale en-IN · Duration 6.1s",
+          'Transcript: "What were last quarter\'s support ticket trends?"\nConfidence 0.94 · Locale en-IN · Duration 6.1s',
         payload: {
           mode: "speech-to-text",
           locale: "en-IN",
@@ -376,7 +373,6 @@ export function ServiceGrid() {
     [query, cats],
   );
 
-
   const closeDialog = () => {
     setActive(null);
     // Return focus to the card that opened the dialog.
@@ -399,10 +395,7 @@ export function ServiceGrid() {
         resultCount={visible.length}
       />
 
-      <motion.div 
-        layout
-        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-      >
+      <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {visible.map((s, idx) => (
             <motion.div
@@ -430,7 +423,10 @@ export function ServiceGrid() {
                   className="focus-inset absolute inset-0 z-10 cursor-pointer rounded-[inherit]"
                 />
 
-                <span className="glyph text-[#1c293c] font-mono font-black text-3xl opacity-20" aria-hidden>
+                <span
+                  className="glyph text-[#1c293c] font-mono font-black text-3xl opacity-20"
+                  aria-hidden
+                >
                   {s.glyph}
                 </span>
                 <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#1c293c] bg-[#fdc800] border-[2px] border-[#1c293c] px-2 py-0.5 rounded shadow-[1px_1px_0px_0px_#1c293c] inline-block self-start">
@@ -442,7 +438,10 @@ export function ServiceGrid() {
                 <p className="mt-2 text-sm font-medium leading-relaxed text-[#334155]">{s.blurb}</p>
                 <ul className="mt-4 flex flex-wrap gap-1.5">
                   {s.capabilities.map((c) => (
-                    <li key={c} className="chip bg-white border-[2px] border-[#1c293c] font-mono font-bold text-xs text-[#1c293c]">
+                    <li
+                      key={c}
+                      className="chip bg-white border-[2px] border-[#1c293c] font-mono font-bold text-xs text-[#1c293c]"
+                    >
                       {c}
                     </li>
                   ))}
@@ -472,7 +471,7 @@ export function ServiceGrid() {
             </motion.div>
           ))}
         </AnimatePresence>
-        
+
         {visible.length === services.length && (
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -487,7 +486,8 @@ export function ServiceGrid() {
                 05 Microservices. 01 Pipeline.
               </h3>
               <p className="mt-2 text-sm font-medium leading-relaxed text-[#334155]">
-                Independent Azure Cognitive Services synchronized into one continuous voice recognition, telemetry, and speech synthesis station.
+                Independent Azure Cognitive Services synchronized into one continuous voice
+                recognition, telemetry, and speech synthesis station.
               </p>
               <ol className="flow mt-4 text-[#1c293c]">
                 <li>Microphone Audio — Speech STT</li>

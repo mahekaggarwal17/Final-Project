@@ -101,7 +101,9 @@ export function CaseStudy() {
             Real-Time Speech & Telemetry Processing
           </h2>
           <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[#334155]">
-            Continuous speech recognition streams live microphone audio, extracts visual scene evidence, scores incident severity, checks regulatory bylaws via RAG, and synthesizes neural voice output.
+            Continuous speech recognition streams live microphone audio, extracts visual scene
+            evidence, scores incident severity, checks regulatory bylaws via RAG, and synthesizes
+            neural voice output.
           </p>
         </div>
         <dl className="grid grid-cols-3 gap-3">
@@ -110,7 +112,10 @@ export function CaseStudy() {
             { k: "5", v: "Azure AI engines" },
             { k: "1", v: "synthesized response" },
           ].map((s) => (
-            <div key={s.v} className="glass-panel p-3 text-center border-[3px] border-[#1c293c] bg-[#f4f0e6] shadow-[2px_2px_0px_0px_#1c293c]">
+            <div
+              key={s.v}
+              className="glass-panel p-3 text-center border-[3px] border-[#1c293c] bg-[#f4f0e6] shadow-[2px_2px_0px_0px_#1c293c]"
+            >
               <dt className="stat-figure text-2xl font-black text-[#1c293c] md:text-3xl">{s.k}</dt>
               <dd className="mt-1 text-xs font-bold text-[#1c293c] uppercase">{s.v}</dd>
             </div>
@@ -164,7 +169,9 @@ export function CaseStudy() {
             <span className="text-xs font-mono font-black uppercase tracking-wider text-[#1c293c] bg-white border-[2px] border-[#1c293c] px-2 py-0.5 rounded shadow-[1px_1px_0px_0px_#1c293c] inline-block">
               Stage {String(active + 1).padStart(2, "0")} · {stage.azure}
             </span>
-            <h3 className="mt-3 font-display text-xl font-black leading-tight text-[#1c293c] md:text-2xl">{stage.title}</h3>
+            <h3 className="mt-3 font-display text-xl font-black leading-tight text-[#1c293c] md:text-2xl">
+              {stage.title}
+            </h3>
             <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-[#334155]">
               {stage.body}
             </p>
@@ -174,17 +181,27 @@ export function CaseStudy() {
               params={{ serviceId: stage.serviceId }}
             >
               <span>Execute Stage Live</span>
-              <span aria-hidden className="arrow">→</span>
+              <span aria-hidden className="arrow">
+                →
+              </span>
             </Link>
           </div>
           <div className="grid gap-3 lg:col-span-5">
             <div className="glass-panel p-4 border-[3px] border-[#1c293c] bg-white shadow-[3px_3px_0px_0px_#1c293c]">
-              <p className="text-xs font-mono font-extrabold text-[#1c293c] uppercase">Input Payload</p>
-              <p className="mt-2 font-mono text-xs text-[#1c293c] leading-relaxed bg-[#f4f0e6] p-3 rounded-md border-[2px] border-[#1c293c]">{stage.io.in}</p>
+              <p className="text-xs font-mono font-extrabold text-[#1c293c] uppercase">
+                Input Payload
+              </p>
+              <p className="mt-2 font-mono text-xs text-[#1c293c] leading-relaxed bg-[#f4f0e6] p-3 rounded-md border-[2px] border-[#1c293c]">
+                {stage.io.in}
+              </p>
             </div>
             <div className="glass-panel p-4 border-[3px] border-[#1c293c] bg-white shadow-[3px_3px_0px_0px_#1c293c]">
-              <p className="text-xs font-mono font-extrabold text-[#1c293c] uppercase">Output Telemetry</p>
-              <p className="mt-2 font-mono text-xs text-[#1c293c] leading-relaxed bg-[#f4f0e6] p-3 rounded-md border-[2px] border-[#1c293c]">{stage.io.out}</p>
+              <p className="text-xs font-mono font-extrabold text-[#1c293c] uppercase">
+                Output Telemetry
+              </p>
+              <p className="mt-2 font-mono text-xs text-[#1c293c] leading-relaxed bg-[#f4f0e6] p-3 rounded-md border-[2px] border-[#1c293c]">
+                {stage.io.out}
+              </p>
             </div>
           </div>
         </motion.div>

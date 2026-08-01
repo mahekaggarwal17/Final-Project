@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { useMotionProfile, useMotionSettings } from "@/hooks/use-motion-profile";
 import { createFrameBudget } from "@/hooks/use-frame-budget";
 
-
 type TiltCardProps = {
   children: ReactNode;
   className?: string;
@@ -118,7 +117,6 @@ export function TiltCard({
     },
     [intensity, lite, settings.sensitivity],
   );
-
 
   const start = useCallback(() => {
     if (reduced) return;

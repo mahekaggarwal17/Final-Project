@@ -115,4 +115,3 @@ export function createFrameBudget(): FrameBudget {
     fps: targetFps,
   };
 }
-

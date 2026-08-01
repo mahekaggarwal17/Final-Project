@@ -130,7 +130,8 @@ export function BaseUrlSelector({
       <p className="mt-2 text-xs text-muted-foreground">
         Snippets below target{" "}
         <code className="font-mono text-accent">{base.replace(/\/+$/, "") || "—"}</code>
-        {mode !== "deployed" && ". Live “Try this request” calls only work against the deployed host."}
+        {mode !== "deployed" &&
+          ". Live “Try this request” calls only work against the deployed host."}
       </p>
     </div>
   );

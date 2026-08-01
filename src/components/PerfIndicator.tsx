@@ -20,13 +20,7 @@ const WINDOW_MS = 500;
  * lighten the motion settings. The loop never runs while motion is off, so it
  * costs nothing in reduced-motion mode.
  */
-export function PerfIndicator({
-  active,
-  className = "",
-}: {
-  active: boolean;
-  className?: string;
-}) {
+export function PerfIndicator({ active, className = "" }: { active: boolean; className?: string }) {
   const [sample, setSample] = useState<Sample | null>(null);
   const { settings, update } = useMotionSettings();
   const { quality, setQuality, systemReduced } = useMotionQuality();

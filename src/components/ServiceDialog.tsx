@@ -58,9 +58,7 @@ function ExampleSnippets({
   const focusTab = (id: TabId) => {
     setTab(id);
     requestAnimationFrame(() => {
-      listRef.current
-        ?.querySelector<HTMLButtonElement>(`[data-tab-id="${id}"]`)
-        ?.focus();
+      listRef.current?.querySelector<HTMLButtonElement>(`[data-tab-id="${id}"]`)?.focus();
     });
   };
 
@@ -173,8 +171,7 @@ function ExamplesSection({ service }: { service: Service }) {
         onChange={setBase}
       />
       <p className="mt-2 text-xs text-muted-foreground">
-        Endpoint{" "}
-        <code className="font-mono text-accent">POST {joinBase(base, path)}</code>
+        Endpoint <code className="font-mono text-accent">POST {joinBase(base, path)}</code>
       </p>
       <ul className="mt-3 grid list-none gap-3 p-0">
         {service.examples.map((ex) => (
@@ -206,8 +203,6 @@ function ExamplesSection({ service }: { service: Service }) {
     </section>
   );
 }
-
-
 
 export function ServiceDialog({ service, onClose }: ServiceDialogProps) {
   // The modal shows skeletons until its content is mounted and measurable, so
@@ -255,54 +250,53 @@ export function ServiceDialog({ service, onClose }: ServiceDialogProps) {
             )}
 
             <div hidden={!ready} className="flex flex-col gap-4">
-            <DialogHeader>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-                {service.glyph} · {service.azure}
-              </p>
-              <DialogTitle className="font-display text-2xl">{service.name}</DialogTitle>
-              <DialogDescription className="text-sm leading-relaxed">
-                {service.detail}
-              </DialogDescription>
-            </DialogHeader>
+              <DialogHeader>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                  {service.glyph} · {service.azure}
+                </p>
+                <DialogTitle className="font-display text-2xl">{service.name}</DialogTitle>
+                <DialogDescription className="text-sm leading-relaxed">
+                  {service.detail}
+                </DialogDescription>
+              </DialogHeader>
 
-            <ul className="flex flex-wrap gap-2" aria-label={`${service.name} capabilities`}>
-              {service.capabilities.map((c) => (
-                <li key={c} className="chip">
-                  {c}
-                </li>
-              ))}
-            </ul>
-
-            <section aria-labelledby={`${service.id}-how`}>
-              <h4
-                id={`${service.id}-how`}
-                className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground"
-              >
-                How it works
-              </h4>
-              <ol className="flow mt-3">
-                {service.pipeline.map((step) => (
-                  <li key={step}>{step}</li>
+              <ul className="flex flex-wrap gap-2" aria-label={`${service.name} capabilities`}>
+                {service.capabilities.map((c) => (
+                  <li key={c} className="chip">
+                    {c}
+                  </li>
                 ))}
-              </ol>
-            </section>
+              </ul>
 
-            <ExamplesSection service={service} />
+              <section aria-labelledby={`${service.id}-how`}>
+                <h4
+                  id={`${service.id}-how`}
+                  className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground"
+                >
+                  How it works
+                </h4>
+                <ol className="flow mt-3">
+                  {service.pipeline.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ol>
+              </section>
 
-            <Link
-              to="/demo/$serviceId"
-              params={{ serviceId: service.id }}
-              className="link-cta mt-2 self-start focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-              onClick={onClose}
-              aria-label={`Open the live ${service.name} module`}
-            >
-              Open the live module
-              <span aria-hidden className="arrow">
-                →
-              </span>
-            </Link>
+              <ExamplesSection service={service} />
+
+              <Link
+                to="/demo/$serviceId"
+                params={{ serviceId: service.id }}
+                className="link-cta mt-2 self-start focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                onClick={onClose}
+                aria-label={`Open the live ${service.name} module`}
+              >
+                Open the live module
+                <span aria-hidden className="arrow">
+                  →
+                </span>
+              </Link>
             </div>
-
           </>
         )}
       </DialogContent>

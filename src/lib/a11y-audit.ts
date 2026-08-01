@@ -120,21 +120,24 @@ export function auditDocument(doc: Document): AuditResult {
   /* --- ARIA labelling --- */
 
   rule("button-name", "Buttons have an accessible name");
-  root.querySelectorAll("button, [role='button'], [role='switch'], [role='radio'], [role='tab']").forEach((el) => {
-    checked += 1;
-    if (el.getAttribute("aria-hidden") === "true" || !isVisible(el)) return;
-    if (!accessibleName(el)) {
-      add({
-        ruleId: "button-name",
-        rule: "Buttons have an accessible name",
-        severity: "critical",
-        problem: "Control has no text and no aria-label, so screen readers announce only \"button\".",
-        fix: 'Add aria-label="…" describing the action, or include visible text inside the control.',
-        element: describe(el),
-        snippet: snippetOf(el),
-      });
-    }
-  });
+  root
+    .querySelectorAll("button, [role='button'], [role='switch'], [role='radio'], [role='tab']")
+    .forEach((el) => {
+      checked += 1;
+      if (el.getAttribute("aria-hidden") === "true" || !isVisible(el)) return;
+      if (!accessibleName(el)) {
+        add({
+          ruleId: "button-name",
+          rule: "Buttons have an accessible name",
+          severity: "critical",
+          problem:
+            'Control has no text and no aria-label, so screen readers announce only "button".',
+          fix: 'Add aria-label="…" describing the action, or include visible text inside the control.',
+          element: describe(el),
+          snippet: snippetOf(el),
+        });
+      }
+    });
 
   rule("link-name", "Links have an accessible name");
   root.querySelectorAll("a[href], [role='link']").forEach((el) => {
@@ -211,7 +214,7 @@ export function auditDocument(doc: Document): AuditResult {
       rule: "Click handlers sit on real controls",
       severity: "critical",
       problem: "A non-interactive element handles clicks, so it is unreachable by keyboard.",
-      fix: "Use a <button>, or add role=\"button\", tabIndex={0} and an onKeyDown handler for Enter/Space.",
+      fix: 'Use a <button>, or add role="button", tabIndex={0} and an onKeyDown handler for Enter/Space.',
       element: describe(el),
       snippet: snippetOf(el),
     });
@@ -230,7 +233,7 @@ export function auditDocument(doc: Document): AuditResult {
         rule: "Hidden regions contain no focusable elements",
         severity: "critical",
         problem: `aria-hidden="true" wraps ${reachable.length} focusable element(s) — keyboard users can tab into content screen readers cannot see.`,
-        fix: 'Move the focusable content outside the hidden wrapper, or add tabIndex={-1} / the inert attribute to it.',
+        fix: "Move the focusable content outside the hidden wrapper, or add tabIndex={-1} / the inert attribute to it.",
         element: describe(el),
         snippet: snippetOf(el),
       });
@@ -246,13 +249,18 @@ export function auditDocument(doc: Document): AuditResult {
         ruleId: "dialog-trap",
         rule: "Modal dialogs trap focus and are labelled",
         severity: "warning",
-        problem: "Dialog is missing aria-modal=\"true\", so assistive tech may keep reading the page behind it.",
+        problem:
+          'Dialog is missing aria-modal="true", so assistive tech may keep reading the page behind it.',
         fix: 'Add aria-modal="true" and keep focus inside the dialog while it is open.',
         element: describe(el),
         snippet: snippetOf(el),
       });
     }
-    if (!accessibleName(el) && !el.getAttribute("aria-labelledby") && !el.getAttribute("aria-label")) {
+    if (
+      !accessibleName(el) &&
+      !el.getAttribute("aria-labelledby") &&
+      !el.getAttribute("aria-label")
+    ) {
       add({
         ruleId: "dialog-trap",
         rule: "Modal dialogs trap focus and are labelled",
@@ -271,7 +279,8 @@ export function auditDocument(doc: Document): AuditResult {
         ruleId: "dialog-trap",
         rule: "Modal dialogs trap focus and are labelled",
         severity: "critical",
-        problem: "Open dialog has nothing focusable, so keyboard users are stranded with no way out.",
+        problem:
+          "Open dialog has nothing focusable, so keyboard users are stranded with no way out.",
         fix: "Include a close button (or another focusable control) and move focus to it on open.",
         element: describe(el),
         snippet: snippetOf(el),

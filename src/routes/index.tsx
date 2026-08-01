@@ -67,12 +67,21 @@ function Index() {
   return (
     <main className="relative z-10 mx-auto w-full max-w-7xl px-4 py-6 lg:px-8 lg:py-10">
       <div className="rack border-[3px] border-[#1c293c] bg-white shadow-[6px_6px_0px_0px_#1c293c] rounded-2xl overflow-hidden">
-        
         {/* ── Navigation Bar (Neo-Brutalism Developer Design System) ────────────────── */}
         <header className="rack-bar flex flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between border-b-[3px] border-[#1c293c] bg-white">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center justify-center w-10 h-10 bg-[#fdc800] border-[3px] border-[#1c293c] rounded-lg shadow-[2px_2px_0px_0px_#1c293c] font-extrabold text-[#1c293c]">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="22"
+                height="22"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <rect x="2" y="2" width="20" height="8" rx="2" />
                 <rect x="2" y="14" width="20" height="8" rx="2" />
                 <line x1="6" y1="6" x2="6.01" y2="6" />
@@ -80,7 +89,12 @@ function Index() {
               </svg>
             </div>
             <h1 className="font-display text-2xl font-black uppercase tracking-tight text-[#1c293c] md:text-3xl">
-              Azure<span className="text-[#fdc800] underline decoration-[#1c293c] decoration-4"> AI</span> Suite
+              Azure
+              <span className="text-[#fdc800] underline decoration-[#1c293c] decoration-4">
+                {" "}
+                AI
+              </span>{" "}
+              Suite
             </h1>
             <span aria-hidden className="hidden h-6 w-[3px] bg-[#1c293c] md:block" />
             <p className="text-xs font-bold uppercase tracking-wider text-[#334155]">
@@ -109,12 +123,16 @@ function Index() {
               Speech, Vision, Language, Vector RAG & OpenAI.
             </h2>
             <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-[#334155]">
-              A complete multi-service workspace powered by Microsoft Azure. Ingest live voice streams, process computer vision OCR evidence, score report urgency with NLP, query vector index bylaws, and generate automated dispatch plans via GPT reasoning.
+              A complete multi-service workspace powered by Microsoft Azure. Ingest live voice
+              streams, process computer vision OCR evidence, score report urgency with NLP, query
+              vector index bylaws, and generate automated dispatch plans via GPT reasoning.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a className="gold-cta" href="#workspace">
                 <span>Explore All 5 Modules</span>
-                <span aria-hidden className="arrow">↓</span>
+                <span aria-hidden className="arrow">
+                  ↓
+                </span>
               </a>
               <Link
                 className="ghost-cta"
@@ -122,7 +140,9 @@ function Index() {
                 params={{ serviceId: services[0]!.id }}
               >
                 <span>Launch Interactive Demo</span>
-                <span aria-hidden className="arrow">→</span>
+                <span aria-hidden className="arrow">
+                  →
+                </span>
               </Link>
             </div>
             <div className="mt-6 inline-flex items-center gap-2 rounded-lg bg-white border-[2px] border-[#1c293c] p-2.5 shadow-[2px_2px_0px_0px_#1c293c] text-xs font-mono font-bold text-[#1c293c]">
@@ -162,7 +182,10 @@ function Index() {
         </section>
 
         {/* ── Architectural Highlights (Neo-Brutalist Bento) ────────────────── */}
-        <section className="border-t-[3px] border-[#1c293c] bg-[#f4f0e6]/80 p-6 md:p-8" aria-label="Key highlights">
+        <section
+          className="border-t-[3px] border-[#1c293c] bg-[#f4f0e6]/80 p-6 md:p-8"
+          aria-label="Key highlights"
+        >
           <span className="eyebrow">Architecture Highlights</span>
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-6">
             <div className="md:col-span-4">
@@ -174,7 +197,9 @@ function Index() {
                   Voice & Image In. Retrieval & Reasoning in the Center. Action Out.
                 </h3>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-[#334155]">
-                  Each module is deployed independently on Azure cloud microservices, then chained into one unified civic workflow — solving complex municipal hazard triage with high-confidence AI.
+                  Each module is deployed independently on Azure cloud microservices, then chained
+                  into one unified civic workflow — solving complex municipal hazard triage with
+                  high-confidence AI.
                 </p>
               </TiltCard>
             </div>
@@ -212,7 +237,8 @@ function Index() {
             {TICKER}
           </div>
           <p className="sr-only">
-            Azure AI Suite — Built with Microsoft Azure Cognitive Services Speech, Vision, Language, AI Search, and OpenAI.
+            Azure AI Suite — Built with Microsoft Azure Cognitive Services Speech, Vision, Language,
+            AI Search, and OpenAI.
           </p>
         </footer>
       </div>

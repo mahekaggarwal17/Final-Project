@@ -3,7 +3,6 @@ import { services } from "@/components/ServiceGrid";
 import { orbitPresets, useMotionProfile, useMotionSettings } from "@/hooks/use-motion-profile";
 import { createFrameBudget } from "@/hooks/use-frame-budget";
 
-
 const RADIUS = 40; // % of the scene box
 const BASE_SPEED = 0.0035; // rad per 16.7ms frame at the "normal" preset
 const MAX_SPEED = 0.09; // rad per frame — keeps flings readable
@@ -22,9 +21,6 @@ const NODE_LABELS: Record<string, string> = {
 const NODE_TINTS = ["var(--lilac)", "var(--mint)", "var(--skin)", "var(--sand)", "var(--signal)"];
 
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
-
-
-
 
 /**
  * Interactive orbit visual. Drag (mouse, pen or touch) to spin the ring and
@@ -56,7 +52,6 @@ export default function HeroOrbit() {
   const paused = useRef(false);
   const [spinPaused, setSpinPaused] = useState(false);
   const [status, setStatus] = useState("");
-
 
   // One shared DOM write for both the live loop and the hover preview.
   const draw = useCallback((ang: number, tl: number) => {
@@ -119,7 +114,6 @@ export default function HeroOrbit() {
       render();
       budget.measure(started);
     };
-
 
     render();
     frame = requestAnimationFrame(tick);
@@ -234,11 +228,7 @@ export default function HeroOrbit() {
     // Per-frame velocity from this move's speed, smoothed so flicks stay smooth.
     const instant = clamp((delta / dt) * 16.667, -MAX_SPEED, MAX_SPEED);
     velocity.current = velocity.current * 0.7 + instant * 0.3;
-    tilt.current = clamp(
-      tilt.current + dy * 0.25 * settings.sensitivity,
-      p.tiltMin,
-      p.tiltMax,
-    );
+    tilt.current = clamp(tilt.current + dy * 0.25 * settings.sensitivity, p.tiltMin, p.tiltMax);
   };
 
   const endDrag = () => {
@@ -327,12 +317,16 @@ export default function HeroOrbit() {
         className="tilt-scene orbit-grab relative h-72 w-72 rounded-full sm:h-96 sm:w-96 md:h-[26rem] md:w-[26rem]"
         style={{ contain: "layout paint", touchAction: "none" }}
       >
-
-        <div className={`absolute inset-0 [transform-style:preserve-3d] ${lite ? "" : "animate-float"}`}>
+        <div
+          className={`absolute inset-0 [transform-style:preserve-3d] ${lite ? "" : "animate-float"}`}
+        >
           <div
             ref={ringsRef}
             className="absolute inset-0 [transform-style:preserve-3d]"
-            style={{ transform: `rotateX(${preset.restTilt}deg)`, willChange: reduced ? "auto" : "transform" }}
+            style={{
+              transform: `rotateX(${preset.restTilt}deg)`,
+              willChange: reduced ? "auto" : "transform",
+            }}
           >
             <span aria-hidden className="orbit-ring border-dashed" />
             <span aria-hidden className="orbit-ring scale-[0.78] opacity-70" />
@@ -403,9 +397,6 @@ export default function HeroOrbit() {
       <p role="status" aria-live="polite" className="sr-only">
         {status}
       </p>
-
-
-
     </div>
   );
 }

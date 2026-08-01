@@ -11,7 +11,6 @@ const STEPS: Step[] = [
     target: '[data-tour="orbit"]',
     title: "The response core",
     body: "Each floating badge is one live Azure AI service feeding the CivicPulse core. Move your pointer to steer the scene in 3D; on touch or low-power devices it stays calm and static.",
-
   },
   {
     target: '[data-tour="card"]',
@@ -26,7 +25,7 @@ const STEPS: Step[] = [
   {
     target: '[data-tour="open-module"]',
     title: "Run the live demo here",
-    body: "\"Open module\" loads the deployed service inside this site, so you can try every demo without ever leaving the hub.",
+    body: '"Open module" loads the deployed service inside this site, so you can try every demo without ever leaving the hub.',
   },
 ];
 
@@ -100,7 +99,6 @@ export function OnboardingTour() {
     };
   }, [open, measure, step.target]);
 
-
   const finish = useCallback(() => {
     setOpen(false);
     setI(0);
@@ -119,9 +117,7 @@ export function OnboardingTour() {
     if (!open) return;
     const t = requestAnimationFrame(() => {
       if (focusTarget.current === "progress") {
-        progressRef.current
-          ?.querySelector<HTMLButtonElement>(`[data-step-index="${i}"]`)
-          ?.focus();
+        progressRef.current?.querySelector<HTMLButtonElement>(`[data-step-index="${i}"]`)?.focus();
       } else {
         nextRef.current?.focus();
       }
@@ -233,19 +229,17 @@ export function OnboardingTour() {
         />
       )}
 
-
       <div
         ref={panelRef}
         aria-label={`Walkthrough step ${i + 1} of ${STEPS.length}`}
         className="absolute w-[min(22rem,calc(100vw-2rem))] rounded-none border bg-card p-5 shadow-2xl animate-scale-in"
         style={{
-          top: spot
-            ? placeAbove
-              ? Math.max(16, spot.top - 16 - 210)
-              : below
-            : 120,
+          top: spot ? (placeAbove ? Math.max(16, spot.top - 16 - 210) : below) : 120,
           left: spot
-            ? Math.min(Math.max(16, spot.left), window.innerWidth - 16 - Math.min(352, window.innerWidth - 32))
+            ? Math.min(
+                Math.max(16, spot.left),
+                window.innerWidth - 16 - Math.min(352, window.innerWidth - 32),
+              )
             : 16,
         }}
       >
@@ -277,7 +271,7 @@ export function OnboardingTour() {
           <ol ref={progressRef} className="mt-3 flex list-none items-center gap-2 p-0">
             {STEPS.map((s, index) => {
               const isCurrent = index === i;
-              const isDone = index < furthest || (index < i);
+              const isDone = index < furthest || index < i;
               const reachable = index <= furthest;
               const state = isCurrent ? "current step" : isDone ? "completed" : "not visited yet";
               return (

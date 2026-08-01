@@ -52,22 +52,22 @@
   --card-foreground: #1c293c;
   --popover: #ffffff;
   --popover-foreground: #1c293c;
-  
+
   /* Cyber Yellow & Charcoal Neo-Brutalism Accents */
   --primary: #fdc800;
   --primary-foreground: #1c293c;
-  
+
   --accent: #38bdf8;
   --accent-foreground: #1c293c;
   --signal: #38bdf8;
-  
+
   /* Tints for cards */
   --mint: #d1fae5;
   --lilac: #f3e8ff;
   --sand: #fef3c7;
   --skin: #fee2e2;
   --greyish: #f1f5f9;
-  
+
   --secondary: #ffffff;
   --secondary-foreground: #1c293c;
   --muted: #f4f0e6;
@@ -85,7 +85,7 @@
   --glass: #ffffff;
   --glass-strong: #ffffff;
   --glass-border: #1c293c;
-  
+
   --focus-ring-style: solid;
   --focus-ring-width: 3px;
   --focus-ring-offset: 2px;
@@ -112,7 +112,10 @@
     box-shadow: 3px 3px 0px 0px #1c293c;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -451,18 +454,46 @@
 
 /* ---------- Palette tints (Neo-Brutalism cards) ---------- */
 
-@utility tint-signal { background: #e0f2fe; border-color: #1c293c; }
-@utility tint-mint { background: #d1fae5; border-color: #1c293c; }
-@utility tint-lilac { background: #f3e8ff; border-color: #1c293c; }
-@utility tint-sand { background: #fef3c7; border-color: #1c293c; }
-@utility tint-skin { background: #fee2e2; border-color: #1c293c; }
-@utility tint-grey { background: #ffffff; border-color: #1c293c; }
+@utility tint-signal {
+  background: #e0f2fe;
+  border-color: #1c293c;
+}
+@utility tint-mint {
+  background: #d1fae5;
+  border-color: #1c293c;
+}
+@utility tint-lilac {
+  background: #f3e8ff;
+  border-color: #1c293c;
+}
+@utility tint-sand {
+  background: #fef3c7;
+  border-color: #1c293c;
+}
+@utility tint-skin {
+  background: #fee2e2;
+  border-color: #1c293c;
+}
+@utility tint-grey {
+  background: #ffffff;
+  border-color: #1c293c;
+}
 
-@utility card-mint { background: #d1fae5; }
-@utility card-lilac { background: #f3e8ff; }
-@utility card-sand { background: #fef3c7; }
-@utility card-skin { background: #fee2e2; }
-@utility card-grey { background: #ffffff; }
+@utility card-mint {
+  background: #d1fae5;
+}
+@utility card-lilac {
+  background: #f3e8ff;
+}
+@utility card-sand {
+  background: #fef3c7;
+}
+@utility card-skin {
+  background: #fee2e2;
+}
+@utility card-grey {
+  background: #ffffff;
+}
 
 /* ---------- Loader screen ---------- */
 

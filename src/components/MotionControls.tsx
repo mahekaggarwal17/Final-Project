@@ -58,7 +58,6 @@ function Toggle({
           }`}
         />
       </button>
-
     </div>
   );
 }
@@ -72,10 +71,7 @@ export function MotionControls({ className = "" }: { className?: string }) {
   const { reduced } = useMotionProfile();
 
   return (
-    <section
-      aria-labelledby="motion-controls-title"
-      className={`text-left ${className}`}
-    >
+    <section aria-labelledby="motion-controls-title" className={`text-left ${className}`}>
       <div className="flex items-center justify-between gap-3">
         <h2
           id="motion-controls-title"
@@ -177,7 +173,6 @@ export function MotionControls({ className = "" }: { className?: string }) {
             {(orbitPresets[settings.orbitPreset] ?? orbitPresets.normal).hint}
           </p>
         </div>
-
 
         <div>
           <div className="flex items-center justify-between gap-3">

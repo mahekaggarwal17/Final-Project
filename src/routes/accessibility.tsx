@@ -91,62 +91,59 @@ function AccessibilityPage() {
   const [target, setTarget] = useState(TARGETS[0]!.path);
   const frameRef = useRef<HTMLIFrameElement | null>(null);
 
-  const run = useCallback(
-    (path: string) => {
-      setScan({ status: "running", target: path, result: null, message: "" });
+  const run = useCallback((path: string) => {
+    setScan({ status: "running", target: path, result: null, message: "" });
 
-      // Same-origin route rendered offscreen, then audited from its own document.
-      const frame = document.createElement("iframe");
-      frame.title = `Accessibility scan sandbox for ${path}`;
-      frame.setAttribute("aria-hidden", "true");
-      frame.tabIndex = -1;
-      frame.style.cssText =
-        "position:fixed;left:-10000px;top:0;width:1280px;height:1400px;border:0;visibility:hidden;";
-      frameRef.current?.remove();
-      frameRef.current = frame;
+    // Same-origin route rendered offscreen, then audited from its own document.
+    const frame = document.createElement("iframe");
+    frame.title = `Accessibility scan sandbox for ${path}`;
+    frame.setAttribute("aria-hidden", "true");
+    frame.tabIndex = -1;
+    frame.style.cssText =
+      "position:fixed;left:-10000px;top:0;width:1280px;height:1400px;border:0;visibility:hidden;";
+    frameRef.current?.remove();
+    frameRef.current = frame;
 
-      const cleanup = () => {
-        frame.remove();
-        if (frameRef.current === frame) frameRef.current = null;
-      };
+    const cleanup = () => {
+      frame.remove();
+      if (frameRef.current === frame) frameRef.current = null;
+    };
 
-      const timeout = window.setTimeout(() => {
-        cleanup();
-        setScan({
-          status: "error",
-          target: path,
-          result: null,
-          message: "The route took too long to render. Try running the scan again.",
-        });
-      }, 12000);
-
-      frame.addEventListener("load", () => {
-        // Give the route a beat to hydrate and mount deferred UI.
-        window.setTimeout(() => {
-          try {
-            const doc = frame.contentDocument;
-            if (!doc) throw new Error("no document");
-            const result = auditDocument(doc);
-            setScan({ status: "done", target: path, result, message: "" });
-          } catch {
-            setScan({
-              status: "error",
-              target: path,
-              result: null,
-              message: "Could not read that route's document. Scanning this page instead works too.",
-            });
-          } finally {
-            window.clearTimeout(timeout);
-            cleanup();
-          }
-        }, 1400);
+    const timeout = window.setTimeout(() => {
+      cleanup();
+      setScan({
+        status: "error",
+        target: path,
+        result: null,
+        message: "The route took too long to render. Try running the scan again.",
       });
+    }, 12000);
 
-      frame.src = path;
-      document.body.appendChild(frame);
-    },
-    [],
-  );
+    frame.addEventListener("load", () => {
+      // Give the route a beat to hydrate and mount deferred UI.
+      window.setTimeout(() => {
+        try {
+          const doc = frame.contentDocument;
+          if (!doc) throw new Error("no document");
+          const result = auditDocument(doc);
+          setScan({ status: "done", target: path, result, message: "" });
+        } catch {
+          setScan({
+            status: "error",
+            target: path,
+            result: null,
+            message: "Could not read that route's document. Scanning this page instead works too.",
+          });
+        } finally {
+          window.clearTimeout(timeout);
+          cleanup();
+        }
+      }, 1400);
+    });
+
+    frame.src = path;
+    document.body.appendChild(frame);
+  }, []);
 
   useEffect(() => {
     run(TARGETS[0]!.path);
@@ -230,7 +227,10 @@ function AccessibilityPage() {
       {scan.status === "running" && (
         <div className="mt-8 space-y-3" aria-hidden>
           {[0, 1, 2].map((i) => (
-            <div key={i} className="h-24 animate-pulse rounded-none border border-border/70 bg-card/50" />
+            <div
+              key={i}
+              className="h-24 animate-pulse rounded-none border border-border/70 bg-card/50"
+            />
           ))}
         </div>
       )}
@@ -246,11 +246,16 @@ function AccessibilityPage() {
           <section aria-label="Scan summary" className="mt-9">
             <dl className="grid gap-4 sm:grid-cols-4">
               {counts.map((c) => (
-                <div key={c.severity} className="rounded-none border border-border/70 bg-card/70 p-4">
+                <div
+                  key={c.severity}
+                  className="rounded-none border border-border/70 bg-card/70 p-4"
+                >
                   <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     {severityCopy[c.severity].label}
                   </dt>
-                  <dd className="mt-2 font-display text-3xl font-bold text-foreground">{c.count}</dd>
+                  <dd className="mt-2 font-display text-3xl font-bold text-foreground">
+                    {c.count}
+                  </dd>
                   <dd className="mt-1 text-xs text-muted-foreground">
                     {severityCopy[c.severity].blurb}
                   </dd>
