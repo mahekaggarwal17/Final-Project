@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
 const STEPS = [
-  "Listening for reports",
-  "Reading photo evidence",
-  "Scoring urgency",
-  "Citing city bylaws",
+  "Connecting Azure AI Speech",
+  "Initializing Azure AI Vision OCR",
+  "Loading Azure AI Language NLP",
+  "Indexing Vector Search RAG",
+  "Connecting Azure OpenAI GPT-4o",
 ];
-
 
 const NODE_TINTS = ["var(--lilac)", "var(--mint)", "var(--skin)", "var(--sand)", "var(--signal)"];
 
@@ -39,7 +39,7 @@ export function LucidLoader() {
       data-leaving={leaving}
       role="status"
       aria-live="polite"
-      aria-label="Loading the Azure AI hub"
+      aria-label="Loading the Azure AI Hub"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <span
@@ -82,8 +82,10 @@ export function LucidLoader() {
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <p className="font-display text-lg tracking-tight">CivicPulse</p>
-          <p className="label-mono text-muted-foreground">{STEPS[step]}</p>
+          <p className="font-display text-xl font-black uppercase tracking-tight text-[#1c293c]">
+            Azure AI Suite
+          </p>
+          <p className="label-mono font-bold text-[#1c293c]">{STEPS[step]}</p>
           <span className="loader-track" aria-hidden />
         </div>
       </div>

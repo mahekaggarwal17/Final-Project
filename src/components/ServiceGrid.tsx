@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
 import { TiltCard } from "./TiltCard";
 
 const CARD_TINTS = ["tint-sand", "tint-mint", "tint-lilac", "tint-skin", "tint-grey"] as const;
@@ -120,8 +121,8 @@ export const services: Service[] = [
     id: "rag",
     name: "Knowledge Retrieval",
     azure: "Azure AI Search + RAG",
-    url: "https://azure-rag-1.onrender.com/",
-    endpoint: "https://azure-rag-1.onrender.com/api/query",
+    url: "https://azure-ai-search-open-ai.onrender.com/",
+    endpoint: "https://azure-ai-search-open-ai.onrender.com/api/query",
     blurb:
       "Grounded answers over your own documents using vector indexing and retrieval-augmented generation.",
     glyph: "02",
@@ -187,8 +188,8 @@ export const services: Service[] = [
     id: "speech",
     name: "Voice Interface",
     azure: "Azure AI Speech",
-    url: "https://azure-speech-a8kp.onrender.com/",
-    endpoint: "https://azure-speech-a8kp.onrender.com/api/speech",
+    url: "https://speech-ai48.onrender.com/",
+    endpoint: "https://speech-ai48.onrender.com/api/speech",
     blurb:
       "Speech-to-text transcription and neural text-to-speech for fully hands-free interaction.",
     glyph: "03",
@@ -398,88 +399,106 @@ export function ServiceGrid() {
         resultCount={visible.length}
       />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {visible.map((s, idx) => (
-          <TiltCard
-            key={s.id}
-            className={CARD_TINTS[idx % CARD_TINTS.length] ?? ""}
-            hint="Drag to tilt"
-            {...warmProps(s.id, s.url)}
-
-            {...(idx === 0 ? { "data-tour": "card" } : {})}
-          >
-            <button
-              type="button"
-              onClick={(e) => {
-                triggerRef.current = e.currentTarget;
-                setActive(s);
-              }}
-              aria-label={`View details and example requests for ${s.name}`}
-              aria-haspopup="dialog"
-              className="focus-inset absolute inset-0 z-10 cursor-pointer rounded-[inherit]"
-            />
-
-
-            <span className="glyph" aria-hidden>
-              {s.glyph}
-            </span>
-            <p className="text-xs font-mono font-semibold uppercase tracking-wider text-indigo-600">{s.azure}</p>
-            <h3 className="mt-2 text-xl font-bold leading-tight text-slate-900 font-display">
-              {s.name}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.blurb}</p>
-            <ul className="mt-4 flex flex-wrap gap-1.5">
-              {s.capabilities.map((c) => (
-                <li key={c} className="chip">
-                  {c}
-                </li>
-              ))}
-            </ul>
-            <div className="relative z-20 mt-6 flex flex-wrap items-center gap-3">
-              <span
-                className="link-cta pointer-events-none"
-                {...(idx === 0 ? { "data-tour": "details" } : {})}
+      <motion.div 
+        layout
+        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+      >
+        <AnimatePresence mode="popLayout">
+          {visible.map((s, idx) => (
+            <motion.div
+              key={s.id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2, delay: idx * 0.04 }}
+              whileHover={{ y: -3 }}
+            >
+              <TiltCard
+                className={`${CARD_TINTS[idx % CARD_TINTS.length] ?? ""} border-[3px] border-[#1c293c] shadow-[4px_4px_0px_0px_#1c293c] bg-white rounded-xl`}
+                hint="Drag to tilt"
+                {...warmProps(s.id, s.url)}
+                {...(idx === 0 ? { "data-tour": "card" } : {})}
               >
-                View details
-                <span aria-hidden className="arrow">
-                  →
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    triggerRef.current = e.currentTarget;
+                    setActive(s);
+                  }}
+                  aria-label={`View details and example requests for ${s.name}`}
+                  aria-haspopup="dialog"
+                  className="focus-inset absolute inset-0 z-10 cursor-pointer rounded-[inherit]"
+                />
+
+                <span className="glyph text-[#1c293c] font-mono font-black text-3xl opacity-20" aria-hidden>
+                  {s.glyph}
                 </span>
-              </span>
-              <Link
-                to="/demo/$serviceId"
-                params={{ serviceId: s.id }}
-                preload="intent"
-                className="text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors"
-                onClick={(e) => e.stopPropagation()}
-                {...(idx === 0 ? { "data-tour": "open-module" } : {})}
-              >
-                Open module
-              </Link>
-
-            </div>
-          </TiltCard>
-        ))}
+                <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#1c293c] bg-[#fdc800] border-[2px] border-[#1c293c] px-2 py-0.5 rounded shadow-[1px_1px_0px_0px_#1c293c] inline-block self-start">
+                  {s.azure}
+                </span>
+                <h3 className="mt-3 text-xl font-black leading-tight text-[#1c293c] font-display">
+                  {s.name}
+                </h3>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-[#334155]">{s.blurb}</p>
+                <ul className="mt-4 flex flex-wrap gap-1.5">
+                  {s.capabilities.map((c) => (
+                    <li key={c} className="chip bg-white border-[2px] border-[#1c293c] font-mono font-bold text-xs text-[#1c293c]">
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+                <div className="relative z-20 mt-6 flex flex-wrap items-center gap-3">
+                  <span
+                    className="link-cta pointer-events-none"
+                    {...(idx === 0 ? { "data-tour": "details" } : {})}
+                  >
+                    Inspect Engine
+                    <span aria-hidden className="arrow">
+                      →
+                    </span>
+                  </span>
+                  <Link
+                    to="/demo/$serviceId"
+                    params={{ serviceId: s.id }}
+                    preload="intent"
+                    className="text-xs font-extrabold text-[#1c293c] hover:underline transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                    {...(idx === 0 ? { "data-tour": "open-module" } : {})}
+                  >
+                    Run Demo
+                  </Link>
+                </div>
+              </TiltCard>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+        
         {visible.length === services.length && (
-          <TiltCard className="tint-grey">
-            <p className="text-xs font-mono font-semibold uppercase tracking-wider text-indigo-600">
-              Architecture
-            </p>
-            <h3 className="mt-2 text-xl font-bold leading-tight text-slate-900 font-display">
-              One product, five services
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              Each module is deployed independently and composed into a single mini product: voice
-              or image in, retrieval and reasoning in the middle, language analytics out.
-            </p>
-            <ol className="flow mt-4">
-              <li>Capture — Speech / Vision</li>
-              <li>Understand — Language</li>
-              <li>Ground — RAG over documents</li>
-              <li>Respond — Azure OpenAI</li>
-            </ol>
-          </TiltCard>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2, delay: services.length * 0.04 }}
+          >
+            <TiltCard className="tint-grey border-[3px] border-[#1c293c] shadow-[4px_4px_0px_0px_#1c293c] bg-white rounded-xl">
+              <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#1c293c] bg-[#38bdf8] border-[2px] border-[#1c293c] px-2 py-0.5 rounded shadow-[1px_1px_0px_0px_#1c293c] inline-block self-start">
+                System Orchestration
+              </span>
+              <h3 className="mt-3 text-xl font-black leading-tight text-[#1c293c] font-display">
+                05 Microservices. 01 Pipeline.
+              </h3>
+              <p className="mt-2 text-sm font-medium leading-relaxed text-[#334155]">
+                Independent Azure Cognitive Services synchronized into one continuous voice recognition, telemetry, and speech synthesis station.
+              </p>
+              <ol className="flow mt-4 text-[#1c293c]">
+                <li>Microphone Audio — Speech STT</li>
+                <li>Computer Vision — OCR & Evidence</li>
+                <li>Cognitive Parsing — AI Language</li>
+                <li>Neural Voice — Synthesizer TTS</li>
+              </ol>
+            </TiltCard>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
 
       {visible.length === 0 && (
         <p className="rounded-2xl border border-dashed border-border/70 p-10 text-center text-sm text-muted-foreground">

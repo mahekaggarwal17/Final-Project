@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Stage = {
   id: string;
@@ -13,73 +14,71 @@ type Stage = {
 };
 
 /**
- * The real-world problem this capstone solves: a city gets thousands of messy
- * hazard reports (potholes, broken lights, flooding) and triages them by hand.
- * CivicPulse turns each report into a ranked, policy-backed dispatch plan.
+ * Azure AI Suite 5-Service Chained Pipeline Workflow
  */
 export const stages: Stage[] = [
   {
     id: "intake",
-    service: "Speech",
+    service: "Speech AI",
     azure: "Azure AI Speech",
     serviceId: "speech",
-    title: "A resident just speaks the problem",
-    body: "No forms. A 12-second voice note in the street is transcribed live, so people who can't type or don't share the city's main language still get heard.",
+    title: "Voice Report Ingestion & Live Transcription",
+    body: "Ingests microphone audio in real-time, transcribes spoken words continuously, and computes live hypothesis streams with multi-language support.",
     io: {
-      in: "Voice note: “there's water gushing from the pipe outside 42 Marine Drive since morning”",
-      out: "Transcript + language code + confidence 0.94",
+      in: "Microphone Audio: “there's a water main leak outside Sector 4 near Valve 118”",
+      out: "Finalized Transcript + lang: en-US + confidence: 0.98",
     },
     tint: "card-skin",
   },
   {
     id: "evidence",
-    service: "Vision",
+    service: "Computer Vision OCR",
     azure: "Azure AI Vision",
     serviceId: "vision",
-    title: "The attached photo becomes evidence",
-    body: "Vision reads the photo for objects, scene and any text on signage or meters — turning a blurry phone picture into structured facts a dispatcher can trust.",
+    title: "Visual Scene & Meter OCR Extraction",
+    body: "Reads scene tags, detects hazard features, and extracts text on meter plates and signage via OCR, transforming photos into verified telemetry.",
     io: {
-      in: "photo_4821.jpg (burst pipe, flooded footpath)",
-      out: "tags: water, pipe, pavement, flooding · OCR: “WARD 6 / METER 118”",
+      in: "photo_meter_118.jpg (flooded street, water valve)",
+      out: "tags: water_valve, flooding · OCR: “SECTOR 4 / VALVE 118”",
     },
     tint: "card-mint",
   },
   {
     id: "triage",
-    service: "Language",
+    service: "Cognitive Language",
     azure: "Azure AI Language",
     serviceId: "language",
-    title: "Urgency is scored, not guessed",
-    body: "Sentiment, key phrases and entities set the severity band and pull out the address, ward and asset ID — the fields that normally take a human ten minutes.",
+    title: "Urgency Scoring & Entity Extraction",
+    body: "Sentiment, key phrase mining, and named entity recognition automatically classify severity levels and extract addresses and ward numbers.",
     io: {
-      in: "Transcript + vision tags",
-      out: "severity: HIGH · category: water_leak · location: 42 Marine Dr · ward: 6",
+      in: "Transcript + Vision OCR payload",
+      out: "severity: HIGH · category: water_leak · location: Sector 4 Valve 118",
     },
     tint: "card-lilac",
   },
   {
     id: "policy",
-    service: "RAG Search",
+    service: "Bylaw RAG Search",
     azure: "Azure AI Search",
     serviceId: "rag",
-    title: "The rulebook answers, with citations",
-    body: "Retrieval over municipal SOPs and bylaws finds the exact clause that governs this incident, so the response is defensible instead of improvised.",
+    title: "Rulebook & Bylaw Policy Retrieval",
+    body: "Hybrid vector search queries municipal SOP documents and bylaws to retrieve official response procedures and legally mandated SLAs.",
     io: {
-      in: "“water main leak response time ward 6”",
-      out: "SOP-14 §3.2 — 4h response · Water Works Dept · escalate after 8h",
+      in: "Query: “water main leak response window ward 6”",
+      out: "SOP-14 §3.2 — 4h response window · Water Works Escalation",
     },
     tint: "card-sand",
   },
   {
     id: "plan",
-    service: "OpenAI",
-    azure: "Azure OpenAI",
+    service: "Neural Synthesis & Dispatch",
+    azure: "Azure OpenAI & TTS",
     serviceId: "openai",
-    title: "One dispatch plan, ready to send",
-    body: "The reasoning layer composes everything into a work order, a resident SMS in their own language, and a one-line summary for the ward dashboard.",
+    title: "Dispatch Generation & Neural Voice Output",
+    body: "Synthesizes structured work orders and generates lifelike neural text-to-speech audio updates for field crews and public dashboards.",
     io: {
-      in: "Transcript + evidence + severity + SOP-14",
-      out: "Work order WO-2261 · crew: Water Works · SLA 4h · resident SMS drafted",
+      in: "Transcript + Vision Evidence + Bylaw SOP-14",
+      out: "WorkOrder WO-4821 · Crew: Rapid Water Repair · Voice Audio Synthesized",
     },
     tint: "card-grey",
   },
@@ -92,38 +91,35 @@ export function CaseStudy() {
   return (
     <section
       id="case-study"
-      aria-label="CivicPulse case study"
-      className="scroll-mt-6 border-t border-slate-200 bg-white p-6 md:p-8"
+      aria-label="Speech AI case study"
+      className="scroll-mt-6 border-t-[3px] border-[#1c293c] bg-[#ffffff] p-6 md:p-8"
     >
-      <div className="flex flex-wrap items-end justify-between gap-3">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Pipeline Workflow</p>
-          <h2 className="mt-1 font-display text-xl font-bold text-slate-900 md:text-3xl">
-            City hazard reports, triaged in seconds
+          <span className="eyebrow">Audio Pipeline Architecture</span>
+          <h2 className="mt-2 font-display text-2xl font-black text-[#1c293c] md:text-3xl">
+            Real-Time Speech & Telemetry Processing
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
-            City call centres drown in unstructured complaints: voice notes, photos and half-typed
-            addresses. Crews are dispatched late, and residents never hear back. CivicPulse chains
-            five Azure AI services into one pipeline that listens, sees, scores, checks the rulebook
-            and writes the dispatch plan.
+          <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[#334155]">
+            Continuous speech recognition streams live microphone audio, extracts visual scene evidence, scores incident severity, checks regulatory bylaws via RAG, and synthesizes neural voice output.
           </p>
         </div>
         <dl className="grid grid-cols-3 gap-3">
           {[
-            { k: "12s", v: "voice note in" },
-            { k: "5", v: "AI services chained" },
-            { k: "1", v: "dispatch plan out" },
+            { k: "12s", v: "audio ingestion" },
+            { k: "5", v: "Azure AI engines" },
+            { k: "1", v: "synthesized response" },
           ].map((s) => (
-            <div key={s.v} className="glass-panel p-3 text-center">
-              <dt className="stat-figure text-2xl font-bold text-slate-900 md:text-3xl">{s.k}</dt>
-              <dd className="mt-1 text-xs font-medium text-slate-500">{s.v}</dd>
+            <div key={s.v} className="glass-panel p-3 text-center border-[3px] border-[#1c293c] bg-[#f4f0e6] shadow-[2px_2px_0px_0px_#1c293c]">
+              <dt className="stat-figure text-2xl font-black text-[#1c293c] md:text-3xl">{s.k}</dt>
+              <dd className="mt-1 text-xs font-bold text-[#1c293c] uppercase">{s.v}</dd>
             </div>
           ))}
         </dl>
       </div>
 
-      {/* stage picker */}
-      <ol className="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Pipeline stages">
+      {/* stage picker tabs */}
+      <ol className="mt-6 flex flex-wrap gap-2.5" role="tablist" aria-label="Pipeline stages">
         {stages.map((s, i) => (
           <li key={s.id}>
             <button
@@ -138,9 +134,13 @@ export function CaseStudy() {
                 if (e.key === "ArrowRight") setActive((i + 1) % stages.length);
                 if (e.key === "ArrowLeft") setActive((i - 1 + stages.length) % stages.length);
               }}
-              className={`stage-chip ${i === active ? "stage-chip-active" : ""}`}
+              className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-black transition-all border-[3px] border-[#1c293c] ${
+                i === active
+                  ? "bg-[#fdc800] text-[#1c293c] shadow-[4px_4px_0px_0px_#1c293c] -translate-x-0.5 -translate-y-0.5"
+                  : "bg-white text-[#1c293c] hover:bg-[#f4f0e6] shadow-[2px_2px_0px_0px_#1c293c]"
+              }`}
             >
-              <span className="font-mono text-xs font-semibold">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-mono text-xs font-black">{String(i + 1).padStart(2, "0")}</span>
               <span>{s.service}</span>
             </button>
           </li>
@@ -148,43 +148,47 @@ export function CaseStudy() {
       </ol>
 
       {/* active stage */}
-      <div
-        key={stage.id}
-        role="tabpanel"
-        id={`stage-panel-${stage.id}`}
-        aria-labelledby={`stage-tab-${stage.id}`}
-        className={`stage-panel mt-5 grid grid-cols-1 gap-5 p-6 lg:grid-cols-12 ${stage.tint}`}
-      >
-        <div className="lg:col-span-7">
-          <p className="text-xs font-mono font-semibold uppercase tracking-wider text-indigo-600">
-            Stage {String(active + 1).padStart(2, "0")} · {stage.azure}
-          </p>
-          <p className="mt-2 font-display text-lg font-bold leading-tight text-slate-900 md:text-2xl">{stage.title}</p>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-600">
-            {stage.body}
-          </p>
-          <Link
-            className="ghost-cta mt-5"
-            to="/demo/$serviceId"
-            params={{ serviceId: stage.serviceId }}
-          >
-            Run this stage live
-            <span aria-hidden className="arrow">
-              →
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={stage.id}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          role="tabpanel"
+          id={`stage-panel-${stage.id}`}
+          aria-labelledby={`stage-tab-${stage.id}`}
+          className={`stage-panel mt-6 grid grid-cols-1 gap-6 p-6 lg:grid-cols-12 rounded-xl border-[3px] border-[#1c293c] shadow-[6px_6px_0px_0px_#1c293c] ${stage.tint}`}
+        >
+          <div className="lg:col-span-7">
+            <span className="text-xs font-mono font-black uppercase tracking-wider text-[#1c293c] bg-white border-[2px] border-[#1c293c] px-2 py-0.5 rounded shadow-[1px_1px_0px_0px_#1c293c] inline-block">
+              Stage {String(active + 1).padStart(2, "0")} · {stage.azure}
             </span>
-          </Link>
-        </div>
-        <div className="grid gap-3 lg:col-span-5">
-          <div className="glass-panel p-4">
-            <p className="text-xs font-mono font-semibold text-slate-500 uppercase">Input</p>
-            <p className="mt-2 font-mono text-xs text-slate-700 leading-relaxed bg-slate-50 p-2.5 rounded-md border border-slate-100">{stage.io.in}</p>
+            <h3 className="mt-3 font-display text-xl font-black leading-tight text-[#1c293c] md:text-2xl">{stage.title}</h3>
+            <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-[#334155]">
+              {stage.body}
+            </p>
+            <Link
+              className="gold-cta mt-6"
+              to="/demo/$serviceId"
+              params={{ serviceId: stage.serviceId }}
+            >
+              <span>Execute Stage Live</span>
+              <span aria-hidden className="arrow">→</span>
+            </Link>
           </div>
-          <div className="glass-panel p-4">
-            <p className="text-xs font-mono font-semibold text-slate-500 uppercase">Output</p>
-            <p className="mt-2 font-mono text-xs text-slate-700 leading-relaxed bg-slate-50 p-2.5 rounded-md border border-slate-100">{stage.io.out}</p>
+          <div className="grid gap-3 lg:col-span-5">
+            <div className="glass-panel p-4 border-[3px] border-[#1c293c] bg-white shadow-[3px_3px_0px_0px_#1c293c]">
+              <p className="text-xs font-mono font-extrabold text-[#1c293c] uppercase">Input Payload</p>
+              <p className="mt-2 font-mono text-xs text-[#1c293c] leading-relaxed bg-[#f4f0e6] p-3 rounded-md border-[2px] border-[#1c293c]">{stage.io.in}</p>
+            </div>
+            <div className="glass-panel p-4 border-[3px] border-[#1c293c] bg-white shadow-[3px_3px_0px_0px_#1c293c]">
+              <p className="text-xs font-mono font-extrabold text-[#1c293c] uppercase">Output Telemetry</p>
+              <p className="mt-2 font-mono text-xs text-[#1c293c] leading-relaxed bg-[#f4f0e6] p-3 rounded-md border-[2px] border-[#1c293c]">{stage.io.out}</p>
+            </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }
