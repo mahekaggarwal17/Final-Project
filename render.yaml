@@ -10,3 +10,7 @@ services:
         value: 20.18.0
       - key: NITRO_PRESET
         value: node-server
+      - key: HOST
+        value: 0.0.0.0
+      - key: NITRO_HOST
+        value: 0.0.0.0
