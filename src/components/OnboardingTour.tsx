@@ -10,7 +10,7 @@ const STEPS: Step[] = [
   {
     target: '[data-tour="orbit"]',
     title: "The response core",
-    body: "Each floating badge is one live Azure AI service feeding the CivicPulse core. Move your pointer to steer the scene in 3D; on touch or low-power devices it stays calm and static.",
+    body: "Each floating badge is one live Azure AI service feeding the Azure AI Suite core. Move your pointer to steer the scene in 3D; on touch or low-power devices it stays calm and static.",
   },
   {
     target: '[data-tour="card"]',
