@@ -77,9 +77,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Azure AI Suite · Multimodal Intelligence Hub" },
-      { name: "description", content: "Multimodal Azure AI Suite uniting Speech, Vision, Language, Search RAG, and OpenAI" },
-      { property: "og:title", content: "Azure AI Suite · Multimodal Intelligence Hub" },
+      { title: "AI SUITE · Multimodal Intelligence Hub" },
+      { name: "description", content: "Multimodal AI SUITE uniting Speech, Vision, Language, Search RAG, and OpenAI" },
+      { property: "og:title", content: "AI SUITE · Multimodal Intelligence Hub" },
       { property: "og:description", content: "Multimodal Azure AI Suite uniting Speech, Vision, Language, Search RAG, and OpenAI" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

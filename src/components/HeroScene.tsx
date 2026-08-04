@@ -115,7 +115,7 @@ export function HeroScene() {
     <div ref={stageRef} className="hero-stage" data-tour="orbit">
       <div ref={layerRef} className="hero-layer">
         <div className="hero-core">
-          <p className="label-mono text-muted-foreground">Azure AI Suite</p>
+          <p className="label-mono text-muted-foreground">AI SUITE</p>
           <p className="mt-1 font-display text-lg leading-none md:text-2xl">Response core</p>
           <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
             One report in · one dispatch plan out
