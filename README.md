@@ -1,18 +1,18 @@
-# CivicPulse — Azure AI Hazard Triage
+# AI Suite — Azure AI Hazard Triage
 
-**CivicPulse** is an intelligent, multi-modal civic hazard triage platform developed for **Season of AI 2.0**. It transforms resident voice notes and incident photos into ranked, policy-backed municipal dispatch plans in seconds by chaining 5 Azure AI services into a single unified operator.
+**AI Suite** is an intelligent, multi-modal civic hazard triage platform developed for **Season of AI 2.0**. It transforms resident voice notes and incident photos into ranked, policy-backed municipal dispatch plans in seconds by chaining 5 Azure AI services into a single unified operator.
 
 ---
 
 ## 🌟 Overview
 
-When infrastructure issues occur — such as broken water mains, unlit roads, or storm flooding — residents need a fast and accessible way to report them. **CivicPulse** listens, visually inspects evidence, rates the severity, references city bylaws, and drafts ready-to-dispatch work orders automatically.
+When infrastructure issues occur — such as broken water mains, unlit roads, or storm flooding — residents need a fast and accessible way to report them. **AI Suite** listens, visually inspects evidence, rates the severity, references city bylaws, and drafts ready-to-dispatch work orders automatically.
 
 ---
 
 ## ⚡ Architecture & Azure AI Pipeline
 
-CivicPulse chains 5 core Azure AI services into one sequential triage workflow:
+AI Suite chains 5 core Azure AI services into one sequential triage workflow:
 
 ```mermaid
 graph LR

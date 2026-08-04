@@ -15,7 +15,7 @@ type Node = {
 
 /**
  * The five Azure services, arranged as the intake → reasoning pipeline of the
- * CivicPulse case study rather than an abstract ring.
+ * AI Suite case study rather than an abstract ring.
  */
 export const heroNodes: Node[] = [
   {
